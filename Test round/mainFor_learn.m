@@ -1,10 +1,11 @@
 clc
-data =importdata('right_angle.in');
+data =importdata('learn_and_teach.in');
 array = [];
 hashtag = 35;
 dot = 46;
-nRows = 40;
-nCols = 200;
+nRows = 158;
+
+nCols = 800;
 for i = 1:nCols
   for j = 1:nRows
     array(j,i) = data{j,1}(i);
@@ -23,7 +24,7 @@ cols = nCols;
 maskWidth = 19;
 command = 0;
 %%
-while (maskWidth >=3)
+while (maskWidth >=5)
   for ( row = maskWidth+1 : rows - maskWidth -1)
     for ( col = maskWidth+1 : cols - maskWidth -1)
       subArray = array(row-maskWidth:row+maskWidth, col-maskWidth:col+maskWidth);
@@ -46,22 +47,36 @@ for (row = 1:nRows)
   for (col = 1:nCols)
     if (array(row,col) == 1)
       command = command +1;
+      
       verticalArray = array(row,col:end);
       indexVertical = find(verticalArray == 0);
-      indexVertical = indexVertical(1)-1;
-      lengthVertical = indexVertical;
+      if (isempty(indexVertical))
+        indexVertical = nCols-col+1;
+      else
+        indexVertical = indexVertical(1)-1;
+      end
+      lengthVertical = indexVertical-1;
       
       horizontalArray = array(row:end,col);
       indexHorizontal = find(horizontalArray == 0);
-      indexHorizontal =indexHorizontal(1)-1;
-      lengthHorizontal = indexHorizontal;
+       if (isempty(indexHorizontal))
+        indexHorizontal = nRows-row+1;
+       else
+        indexHorizontal =indexHorizontal(1)-1;
+       end
+      lengthHorizontal = indexHorizontal-1;
       
-      %if (lengthHorizontal < lengthVertical)
-        array(row,col:col+indexVertical-1)=5;
+      verticalNrPainted = sum(array(row,col:col+lengthVertical)==1);
+      horizontalNrPainted = sum(array(row:row+lengthHorizontal,col)==1);
+      
+      %if (horizontalNrPainted < verticalNrPainted)
+        array(row,col:col+lengthVertical)=5;
       %else
-        %array(row:row+indexHorizontal-1,col)=5;
+      % array(row:row+lengthHorizontal,col)=5;
       %end
     end
+    
+    
   end
 end
 command
