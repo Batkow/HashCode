@@ -17,12 +17,12 @@ array(idx) = 1;
 
 
 
-
+fileID = fopen('logoCommands.txt','w');
 rows = nRows;
 cols = nCols;
 maskWidth = 19;
 command = 0;
-%%
+
 while (maskWidth >=1)
   for ( row = maskWidth+1 : rows - maskWidth -1)
     for ( col = maskWidth+1 : cols - maskWidth -1)
@@ -30,6 +30,7 @@ while (maskWidth >=1)
       if ( numel(find(subArray==1)) == (maskWidth*2+1)^2) 
         command = command +1;
         array(row-maskWidth:row+maskWidth, col-maskWidth:col+maskWidth) = 5;
+        fprintf(fileID,'PAINT_SQUARE %d %d %d\n',row-1,col-1,maskWidth);
       end
     end
   end
@@ -41,7 +42,6 @@ command
 close all
 imshow(array,[])  
 
-%%
 for (row = 1:nRows)
   for (col = 1:nCols)
     if (array(row,col) == 1)
@@ -69,6 +69,7 @@ for (row = 1:nRows)
       
       %if (horizontalNrPainted < verticalNrPainted)
         array(row,col:col+lengthVertical)=5;
+        fprintf(fileID,'PAINT_LINE %d %d %d %d\n',row-1,col-1,row-1,col-1+lengthVertical);
       %else
       % array(row:row+lengthHorizontal,col)=5;
       %end

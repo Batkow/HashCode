@@ -14,15 +14,15 @@ end
 idx =  array==hashtag;
 array = zeros(nRows,nCols);
 array(idx) = 1;
-
-
+origArray = array;
+fileID = fopen('rightCommands.txt','w');
 
 
 rows = nRows;
 cols = nCols;
 maskWidth = 19;
 command = 0;
-%%
+
 while (maskWidth >=3)
   for ( row = maskWidth+1 : rows - maskWidth -1)
     for ( col = maskWidth+1 : cols - maskWidth -1)
@@ -30,6 +30,7 @@ while (maskWidth >=3)
       if ( numel(find(subArray==1)) == (maskWidth*2+1)^2) 
         command = command +1;
         array(row-maskWidth:row+maskWidth, col-maskWidth:col+maskWidth) = 5;
+        fprintf(fileID,'PAINT_SQUARE %d %d %d\n',row-1,col-1,maskWidth);
       end
     end
   end
@@ -56,15 +57,19 @@ for (row = 1:nRows)
       indexHorizontal =indexHorizontal(1)-1;
       lengthHorizontal = indexHorizontal;
       
-      %if (lengthHorizontal < lengthVertical)
+      if (lengthHorizontal < lengthVertical)
         array(row,col:col+indexVertical-1)=5;
-      %else
-        %array(row:row+indexHorizontal-1,col)=5;
-      %end
+        fprintf(fileID,'PAINT_LINE %d %d %d %d\n',row-1,col-1,row-1,col-1+lengthVertical);
+      else
+        array(row:row+indexHorizontal-1,col)=5;
+        fprintf(fileID,'PAINT_LINE %d %d %d %d\n',row-1,col-1,row-1+lengthHorizontal,col-1);
+      end
     end
   end
 end
 command
 close all
-imshow(array,[])  
+imshow(origArray- array/5,[])  
+
+fclose(fileID)
 
