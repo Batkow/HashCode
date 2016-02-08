@@ -49,6 +49,9 @@ while i <= nRows
   i = i + 1;
 end
 
+
+toc();
+
 subplot(3,1,1)
 imshow(array,[])
 title('Original')
@@ -56,6 +59,7 @@ title('Original')
 subplot(3,1,2)
 imshow(arrayCopy,[])
 title('Painted')
+grid on
 
 subplot(3,1,3)
 imshow(abs(array-arrayCopy),[])
@@ -63,9 +67,9 @@ title('Difference')
 
 fprintf('nr of instructions: %i\n', nInstructions)
 fprintf('image diff: %i\n', sum(sum(abs(array-arrayCopy))))
+fprintf('cells/instruction: %f\n', sum(sum(array))/nInstructions)
 
 
-toc();
         
 
 
