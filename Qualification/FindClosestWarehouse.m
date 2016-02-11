@@ -1,4 +1,4 @@
-function [drone, warehouse] = FindClosestWarehouse(drone,warehouse,product);
+function [drone, warehouse] = FindClosestWarehouse(drone,warehouse,product,index);
 
   minDistance = inf;
   % Loop through warehouses
@@ -21,3 +21,6 @@ function [drone, warehouse] = FindClosestWarehouse(drone,warehouse,product);
   drone.pos = warehouse(bestIndex).pos;
   minDistance = ceil(minDistance);
   drone.coolDown = drone.coolDown + minDistance + (minDistance ~= 0);
+  
+  fprintf('%i L %i %i %i \n', index-1, bestIndex-1, product, 1);
+  

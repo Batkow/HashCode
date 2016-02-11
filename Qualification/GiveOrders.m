@@ -9,7 +9,7 @@ function [drone,warehouse,order] = GiveOrders(drone,...
                      productWeights)
                      
   for i = indexFreeDrones
-    [loadedDrone,order,warehouse] = LoadDrone(drone(i),order,warehouse,productWeights,maxPayload);
+    [loadedDrone,order,warehouse] = LoadDrone(drone(i),order,warehouse,productWeights,maxPayload,i);
     drone(i) = loadedDrone;
   end
      

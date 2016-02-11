@@ -3,6 +3,8 @@ fileId = fopen('redundancy.in');
 data = textscan(fileId,'%d',5);
 data = data{1};
 
+diary('outputfile.txt');
+
 % Parameters
 nRows = data(1);
 nCols = data(2);
@@ -76,9 +78,11 @@ while(t<500)
         minCool = drone(i).coolDown;
       end
     end
-    
+  end
   
   t = t + 1;
   
 end
+
+diary off;
 

@@ -1,6 +1,6 @@
-function [drone,order,warehouse] = LoadDrone(drone,order,warehouse,productWeight,maxPayload)
+function [drone,order,warehouse] = LoadDrone(drone,order,warehouse,productWeight,maxPayload,index)
 
-  i = 1;
+  i = size(order,2);
   j = 1;
   nRemovedItems = 0;
   position = [];
@@ -11,7 +11,7 @@ function [drone,order,warehouse] = LoadDrone(drone,order,warehouse,productWeight
     
     if (weight+drone.load < maxPayload)
       % Load orders
-      order(i)
+      %order(i)
       drone.load = drone.load + weight;
       order(i).nItems = order(i).nItems -1;
       
@@ -26,8 +26,8 @@ function [drone,order,warehouse] = LoadDrone(drone,order,warehouse,productWeight
       end
       
      %Find closest warehouse that has product and grab it!
-    [drone,warehouse] = FindClosestWarehouse(drone,warehouse,product);
-    [drone] = GetToTarget(drone,position);
+    [drone,warehouse] = FindClosestWarehouse(drone,warehouse,product,index);
+    [drone] = GetToTarget(drone,position,index,i,product);
       
     end
     j = j + 1;
@@ -44,7 +44,7 @@ function [drone,order,warehouse] = LoadDrone(drone,order,warehouse,productWeight
       
 
   end
-  disp('droen loaded')
+  %disp('droen loaded')
 
 
 
