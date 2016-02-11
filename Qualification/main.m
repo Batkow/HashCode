@@ -5,10 +5,10 @@ data = data{1};
 
 % Parameters
 nRows = data(1);
-nCols = data(1);
-nDrones = data(1);
-nTurns = data(1);
-maxPayload = data(1);
+nCols = data(2);
+nDrones = data(3);
+nTurns = data(4);
+maxPayload = data(5);
 data = textscan(fileId,'%d',1);
 data = data{1};
 nProducts  = data;
