@@ -70,6 +70,12 @@ while(t<500)
   [drone,warehouse,order] = GiveOrders(drone,warehouse,order,nWarehouses,nOrders,indexFreeDrones,t,maxPayload,productWeights);
   
   if (isempty(indexFreeDrones))
+    minCool = inf;
+    for i = 1:nDrones
+      if (minCool < drone(i).coolDown)
+        minCool = drone(i).coolDown;
+      end
+    end
     
   
   t = t + 1;
