@@ -11,6 +11,7 @@ function [drone,order,warehouse] = LoadDrone(drone,order,warehouse,productWeight
     
     if (weight+drone.load < maxPayload)
       % Load orders
+      order(i)
       drone.load = drone.load + weight;
       order(i).nItems = order(i).nItems -1;
       
@@ -43,7 +44,7 @@ function [drone,order,warehouse] = LoadDrone(drone,order,warehouse,productWeight
       
 
   end
-
+  disp('droen loaded')
 
 
 

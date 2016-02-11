@@ -62,15 +62,17 @@ end
 
 t = 0;
 
-while(t<nTurns)
+while(t<500)
   indexFreeDrones = GetFreeDrones(drone,nDrones,t);
   
+    
   % Give orders
-  drone = GiveOrders(drone,warehouse,order,nWarehouses,nOrders,indexFreeDrones,t,maxPayload,productWeights);
+  [drone,warehouse,order] = GiveOrders(drone,warehouse,order,nWarehouses,nOrders,indexFreeDrones,t,maxPayload,productWeights);
   
+  if (isempty(indexFreeDrones))
+    
   
-  
-  t = t + 1
+  t = t + 1;
   
 end
 
