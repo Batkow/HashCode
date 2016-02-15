@@ -4,7 +4,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		Scenario scenario = Scenario.loadFromFile();
+		Scenario scenario = Scenario.loadFromFile("taskdata/test.in");
 	}
 
 }

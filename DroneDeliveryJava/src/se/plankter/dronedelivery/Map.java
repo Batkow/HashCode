@@ -2,19 +2,19 @@ package se.plankter.dronedelivery;
 
 public class Map {
 
-	private final int width;
-	private final int height;
+	private final int rows;
+	private final int cols;
 	
-	public Map(int width, int height) {
-		this.width = width;
-		this.height = height;
+	public Map(int rows, int cols) {
+		this.rows = rows;
+		this.cols = cols;
 	}
 
-	public int getWidth() {
-		return width;
+	public int getRows() {
+		return rows;
 	}
 
-	public int getHeight() {
-		return height;
+	public int getCols() {
+		return cols;
 	}
 }

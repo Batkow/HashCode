@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Order {
 	
-	private final int id;
+	public final int id;
 
 	private final int deliveryPosX;
 	private final int deliveryPosY;

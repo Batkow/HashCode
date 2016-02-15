@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Drone {
 
-	private final int id;
+	public final int id;
 	
 	private int posX;
 	private int posY;
